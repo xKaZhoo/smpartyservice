@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stefanie Maier – Live Cooking und Catering</title>
+    <meta name="description" content="Stefanie Maier bietet Live Cooking und Catering für Hochzeiten, Firmenfeiern, Geburtstage und mehr. Usbekische und mediterrane Spezialitäten, Grillservice und vieles mehr.">
+
+    <link rel="preload" href="AlexBrush.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="GlacialIndifference.otf" as="font" type="font/otf" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        @font-face {
+            font-family: 'GlacialIndifference';
+            src: url('GlacialIndifference.otf') format('opentype');
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'AlexBrush';
+            src: url('AlexBrush.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        :root {
+            --gold:  #ffd22d;
+            --gruen: #31ad6e;
+            --rot:   #f32351;
+            --blau:  #17d7e6;
+            --rosa:  #f634af;
+            --lila:  #8f53da;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background-color: #000;
+            background-image:
+                linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+                url('public/ornament.webp');
+            background-size: 500px auto;
+            background-position: top left;
+            background-repeat: no-repeat;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        img { display: block; max-width: 100%; }
+
+        /* ══ HEADER ══════════════════════════════════════════ */
+        .header-wrapper {
+            position: sticky;
+            top: 0;
+            background: #000;
+            border-bottom: 1px solid #333;
+            z-index: 10;
+        }
+
+        .header-topbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+        }
+
+        /* soziale Links (nur Desktop) */
+        .header-social {
+            display: none;
+            gap: 16px;
+            align-items: center;
+        }
+        .header-social a { font-size: 1.25rem; }
+
+        /* Burger-Icon (nur Mobile) */
+        .burger {
+            font-size: 1.875rem;
+            cursor: pointer;
+            padding: 10px 0;
+            line-height: 1;
+        }
+
+        /* Marke / Titel */
+        .header-brand { text-align: center; }
+
+        .brand-name {
+            display: block;
+            font-family: 'AlexBrush', Arial, sans-serif;
+            font-size: 2.25rem;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .brand-tagline {
+            display: block;
+            font-family: 'GlacialIndifference', Arial, sans-serif;
+            font-size: 0.875rem;
+            margin-top: 8px;
+        }
+
+        /* Telefon rechts */
+        .header-phone {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .phone-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.25rem;
+            margin-right: 8px;
+        }
+
+        .phone-number-text { display: none; }
+
+        /* ── Desktop-Navigation ── */
+        .desktop-nav {
+            display: none;
+            max-width: 768px;
+            margin: 0 auto;
+            padding: 8px 16px;
+        }
+
+        .desktop-nav-links {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .desktop-nav-links a {
+            font-size: 1.125rem;
+            color: #fff;
+            transition: color 0.2s;
+        }
+        .desktop-nav-links a:hover { color: var(--gold); }
+
+        /* ══ MOBILE NAVIGATION ═══════════════════════════════ */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -75%;
+            width: 75%;
+            height: 100%;
+            background: #000;
+            border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            padding: 64px 0 16px;
+            z-index: 50;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .mobile-nav.open { left: 0; }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            font-size: 1.875rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 20px;
+            border-bottom: 1px solid #d1d5db;
+            font-size: 1.125rem;
+            color: #fff;
+            transition: color 0.2s;
+        }
+        .mobile-nav a:hover { color: var(--gold); }
+
+        /* ══ WHATSAPP FAB ════════════════════════════════════ */
+        .whatsapp-fab {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            background: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            width: 64px; height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.875rem;
+            z-index: 50;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* ══ MAIN ════════════════════════════════════════════ */
+        main {
+            position: relative;
+            z-index: 0;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 64px;
+        }
+
+        section {
+            padding: 20px 8px;
+            scroll-margin-top: 130px;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 24px;
+        }
+
+        section .intro {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0 0 24px;
+        }
+
+        /* ── Gerichte (Masonry-Spalten) ── */
+        .dishes-grid {
+            columns: 1;
+            column-gap: 16px;
+        }
+
+        .dish-card {
+            position: relative;
+            background: #000;
+            border: 1px solid #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            break-inside: avoid;
+            margin-bottom: 16px;
+        }
+
+        .dish-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .dish-card:hover img { transform: scale(1.05); }
+
+        .dish-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(0,0,0,0.7);
+            padding: 16px;
+        }
+        .dish-overlay h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin: 0 0 4px;
+        }
+        .dish-overlay p { font-size: 0.875rem; margin: 0; }
+
+        /* ── Events ── */
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .event-card {
+            position: relative;
+            border-radius: 8px;
+            border: 1px solid #fff;
+            overflow: hidden;
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 288px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .event-card:hover img { transform: scale(1.05); }
+
+        .event-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(0,0,0,0.7);
+            padding: 16px;
+        }
+        .event-overlay h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin: 0 0 4px;
+        }
+        .event-overlay p { font-size: 0.875rem; margin: 0; }
+
+        /* ── Zusatzleistungen ── */
+        .leistungen-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .leistung-card {
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #9ca3af;
+        }
+        .leistung-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 8px;
+        }
+        .leistung-card p { margin: 0; }
+
+        .leistung-card.span-full { grid-column: 1 / -1; }
+
+        /* ── Fotogalerie ── */
+        .galerie-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .galerie-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+        }
+
+        .galerie-item img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #fff;
+        }
+
+        /* ══ FOOTER ══════════════════════════════════════════ */
+        footer {
+            background-color: #000;
+            background-image:
+                linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+                url('public/footer.webp');
+            background-size: 288px auto;
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            padding: 32px 0;
+            position: relative;
+            border-top: 1px solid #333;
+        }
+
+        .footer-steffi {
+            display: none;
+            position: absolute;
+            bottom: 32px; right: 48px;
+            width: 192px;
+            z-index: 1;
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-cols {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .footer-col { flex: 1; max-width: 300px; }
+
+        .footer-col h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin: 0 0 16px;
+        }
+
+        .footer-col p { line-height: 1.75; margin: 0 0 4px; }
+
+        .footer-social { margin: 16px 0; }
+
+        .footer-social a {
+            font-size: 1.5rem;
+            margin-right: 16px;
+        }
+
+        /* ══ RESPONSIVE ══════════════════════════════════════ */
+
+        /* Hintergrundbilder nur auf Desktop sichtbar */
+        @media (max-width: 1023px) {
+            body   { background-image: none; }
+            footer { background-image: none; }
+        }
+
+        @media (min-width: 640px) {
+            .dishes-grid  { columns: 2; }
+            .events-grid  { grid-template-columns: repeat(2, 1fr); }
+            .leistungen-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 768px) {
+            section h2         { font-size: 2.25rem; }
+            .phone-number-text { display: inline; }
+            .whatsapp-fab      { bottom: 40px; right: 40px; }
+            .galerie-grid      { grid-template-columns: repeat(3, 1fr); }
+            .footer-steffi     { display: block; }
+            .footer-cols       { flex-direction: row; align-items: flex-start; text-align: left; }
+            .footer-col        { max-width: none; }
+            .footer-social     { text-align: left; }
+        }
+
+        @media (min-width: 1024px) {
+            .header-social   { display: flex; }
+            .burger          { display: none; }
+            .desktop-nav     { display: block; }
+            .dishes-grid     { columns: 3; }
+            .events-grid     { grid-template-columns: repeat(3, 1fr); }
+            .leistungen-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header-wrapper">
+        <div class="header-topbar">
+            <div class="header-grid">
+
+                <!-- Soziale Links (Desktop) / Burger (Mobile) -->
+                <div class="header-social">
+                    <a href="https://www.instagram.com/stefanie.maier.5454/" target="_blank" rel="noopener noreferrer">
+                        <i class="bi bi-instagram" style="color:var(--rot)"></i>
+                    </a>
+                    <a href="https://t.me/MStef79" target="_blank" rel="noopener noreferrer">
+                        <i class="bi bi-telegram" style="color:var(--blau)"></i>
+                    </a>
+                    <a href="https://wa.me/4915121877" target="_blank" rel="noopener noreferrer">
+                        <i class="bi bi-whatsapp" style="color:var(--gruen)"></i>
+                    </a>
+                </div>
+                <div class="burger" id="burger-menu">
+                    <i class="bi bi-list"></i>
+                </div>
+
+                <!-- Markenname -->
+                <div class="header-brand">
+                    <span class="brand-name">Stefanie Maier</span>
+                    <span class="brand-tagline">Live Cooking und Catering</span>
+                </div>
+
+                <!-- Telefon -->
+                <div class="header-phone">
+                    <a class="phone-link" href="tel:+4915121877">
+                        <i class="bi bi-telephone" style="color:var(--rosa)"></i>
+                        <span class="phone-number-text">01512 17877</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Desktop-Navigation -->
+        <nav class="desktop-nav">
+            <div class="desktop-nav-links">
+                <a href="#gerichte">Spezialitäten</a>
+                <a href="#events">Events</a>
+                <a href="#leistungen">Zusatzleistungen</a>
+                <a href="#galerie">Fotogalerie</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-close" id="close-btn"><i class="bi bi-x"></i></div>
+        <a href="#gerichte">Unsere Spezialitäten</a>
+        <a href="#events">Events</a>
+        <a href="#leistungen">Zusatzleistungen</a>
+        <a href="#galerie">Fotogalerie</a>
+    </div>
+
+    <!-- WhatsApp FAB -->
+    <a href="https://wa.me/4915121877" class="whatsapp-fab" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <!-- Main -->
+    <main>
+
+        <!-- Gerichte -->
+        <section id="gerichte">
+            <h2>Unsere Spezialitäten</h2>
+            <p class="intro">Ob frisch vom Grill, herzhaft aus dem Osten oder sonnig-mediterran – unsere Gerichte bringen Vielfalt und Geschmack auf deinen Teller. Hausgemacht, ehrlich und mit viel Liebe zubereitet.</p>
+            <div class="dishes-grid">
+
+                <div class="dish-card">
+                    <img src="public/schaschlik.webp" alt="Schaschlik – zartes Fleisch am Spieß, über offener Flamme gegrillt">
+                    <div class="dish-overlay">
+                        <h3>Schaschlik</h3>
+                        <p>Zartes Fleisch am Spieß, über offener Flamme gegrillt und mit unserer würzigen, hausgemachten Sauce serviert – ein Klassiker, der immer geht.</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="public/bratwurst.webp" alt="Regionale Bratwurst – knusprig gegrillt" loading="lazy">
+                    <div class="dish-overlay">
+                        <h3>Regionale Bratwurst</h3>
+                        <p>Fein abgeschmeckt, knusprig gegrillt und mit Liebe serviert – unsere Bratwurst bringt ehrlichen Geschmack auf den Teller.</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="public/lamm.webp" alt="Lammkotlett – saftig und aromatisch gegart" loading="lazy">
+                    <div class="dish-overlay">
+                        <h3>Lammkotlett</h3>
+                        <p>Saftig, aromatisch und auf den Punkt gegart – ein Highlight für alle, die es besonders mögen.</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="public/vorspeise.webp" alt="Bunte Vorspeisen-Auswahl mit Dips und Häppchen" loading="lazy">
+                    <div class="dish-overlay">
+                        <h3>Vorspeisen</h3>
+                        <p>Ein bunter Mix aus feinen Häppchen, herzhaften Kleinigkeiten und raffinierten Dips – perfekt zum Teilen, Ankommen und Genießen.</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="public/samsa.webp" alt="Samsa – goldbraun gebackene orientalische Teigtasche" loading="lazy">
+                    <div class="dish-overlay">
+                        <h3>Samsa</h3>
+                        <p>Goldbraun gebacken, knusprig gefüllt – diese orientalische Teigtasche steckt voller Geschmack und Überraschung.</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="public/plov.webp" alt="Plov – usbekischer Reisklassiker mit Fleisch und Gewürzen" loading="lazy">
+                    <div class="dish-overlay">
+                        <h3>Plov</h3>
+                        <p>Ein usbekischer Reis-Klassiker mit zartem Fleisch, Möhren und orientalischen Gewürzen – sättigend, duftend, einfach köstlich.</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="public/lagman.webp" alt="Lagman – hausgemachte Nudeln in würziger Brühe" loading="lazy">
+                    <div class="dish-overlay">
+                        <h3>Lagman</h3>
+                        <p>Hausgemachte Nudeln in einer würzigen Brühe mit Fleisch und Gemüse – ein wärmendes Wohlfühlgericht aus Zentralasien.</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="public/fladenbrot.webp" alt="Frisch gebackenes Fladenbrot – locker und goldbraun" loading="lazy">
+                    <div class="dish-overlay">
+                        <h3>Fladenbrot</h3>
+                        <p>Frisch gebacken, locker und goldbraun – perfekt zum Dippen, Belegen oder einfach pur genießen.</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="public/grillgemuese.webp" alt="Buntes Grillgemüse – frisch und aromatisch" loading="lazy">
+                    <div class="dish-overlay">
+                        <h3>Grillgemüse</h3>
+                        <p>Bunt, frisch und voller Aroma – unser Grillgemüse bringt Farbe und Leichtigkeit auf jede Tafel.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Events -->
+        <section id="events">
+            <h2>Wo Menschen feiern, sind wir dabei</h2>
+            <p class="intro">Wir sind dein Partner für unvergessliche Events. Ob Hochzeit, Firmenfeier oder Geburtstag – unsere Services sind individuell auf deine Wünsche und deinen Anlass abgestimmt.</p>
+            <div class="events-grid">
+
+                <div class="event-card">
+                    <img src="public/event-firmenfeier.webp" alt="Firmenfeier – kulinarischer Genuss für Business-Events" loading="lazy">
+                    <div class="event-overlay">
+                        <h3>Firmenfeier</h3>
+                        <p>Kulinarischer Genuss für Ihr Business-Event</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="public/event-weihnachtsfeier.webp" alt="Weihnachtsfeier – festlich genießen" loading="lazy">
+                    <div class="event-overlay">
+                        <h3>Weihnachtsfeier</h3>
+                        <p>Festlich genießen zur schönsten Zeit des Jahres.</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="public/event-geburtstag.webp" alt="Geburtstagsfeier – lecker feiern mit Freunden" loading="lazy">
+                    <div class="event-overlay">
+                        <h3>Geburtstagsfeier</h3>
+                        <p>Lecker feiern mit Freunden und Familie.</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="public/event-hochzeit.webp" alt="Hochzeitsfeier – von der Trauung bis zum Mitternachtssnack" loading="lazy">
+                    <div class="event-overlay">
+                        <h3>Hochzeitsfeier</h3>
+                        <p>Von der Trauung bis zum Mitternachtssnack.</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="public/event-jubilaeumsfeier.webp" alt="Jubiläumsfeier – besondere Menüs für besondere Anlässe" loading="lazy">
+                    <div class="event-overlay">
+                        <h3>Jubiläumsfeier</h3>
+                        <p>Besondere Menüs – für besondere Anlässe.</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="public/event-kommunion-konfirmation.webp" alt="Kommunion und Konfirmation – festlich in familiärer Runde" loading="lazy">
+                    <div class="event-overlay">
+                        <h3>Kommunion / Konfirmation</h3>
+                        <p>Festlich genießen in familiärer Runde.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Zusatzleistungen -->
+        <section id="leistungen">
+            <h2>Wir kümmern uns um mehr als nur gutes Essen</h2>
+            <p class="intro">Wir bringen Stimmung an den Tisch, kümmern uns um Geschirr, Deko, Drinks und sogar ums Aufräumen. Ob Grillshow oder stilvolle Tischdeko – mit unseren Extras wird aus deinem Event ein echtes Erlebnis.</p>
+            <div class="leistungen-grid">
+
+                <div class="leistung-card">
+                    <h3 style="color:var(--gruen)">Sektempfang</h3>
+                    <p>Empfangen Sie Ihre Gäste stilvoll – mit einem Getränk Ihrer Wahl, professionell serviert.</p>
+                </div>
+                <div class="leistung-card">
+                    <h3 style="color:var(--blau)">Tischdekoration</h3>
+                    <p>Individuell, thematisch und liebevoll – wir gestalten Ihre Tische passend zum Anlass.</p>
+                </div>
+                <div class="leistung-card">
+                    <h3 style="color:var(--gold)">Geschirr & Besteck</h3>
+                    <p>Edles Geschirr und hochwertiges Besteck – wir stellen alles für einen stilvollen Rahmen bereit.</p>
+                </div>
+                <div class="leistung-card">
+                    <h3 style="color:var(--lila)">Abräumservice</h3>
+                    <p>Nach dem Essen lehnen Sie sich zurück – wir kümmern uns diskret um das Abräumen.</p>
+                </div>
+                <div class="leistung-card">
+                    <h3>Mobiliar</h3>
+                    <p>Ob Bierbänke oder Stehtische – wir schaffen ausreichend Raum und Komfort für Ihre Gäste.</p>
+                </div>
+                <div class="leistung-card">
+                    <h3 style="color:var(--rosa)">Grillservice</h3>
+                    <p>Live und vor Ort – wir grillen frisch und sorgen für ein kulinarisches Erlebnis mit Show-Faktor.</p>
+                </div>
+                <div class="leistung-card span-full">
+                    <h3 style="color:var(--rot)">Getränkeservice</h3>
+                    <p>Vom Ausschank bis zum Verkauf – wir sorgen für eine reibungslose und charmante Getränkeversorgung.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Fotogalerie -->
+        <section id="galerie">
+            <h2>Fotogalerie</h2>
+            <div class="galerie-grid">
+                <div class="galerie-item"><img src="public/galerie-1.webp" alt="Catering Impression 1" loading="lazy"></div>
+                <div class="galerie-item"><img src="public/galerie-2.webp" alt="Catering Impression 2" loading="lazy"></div>
+                <div class="galerie-item"><img src="public/galerie-3.webp" alt="Catering Impression 3" loading="lazy"></div>
+                <div class="galerie-item"><img src="public/galerie-4.webp" alt="Catering Impression 4" loading="lazy"></div>
+                <div class="galerie-item"><img src="public/galerie-5.webp" alt="Catering Impression 5" loading="lazy"></div>
+                <div class="galerie-item"><img src="public/galerie-6.webp" alt="Catering Impression 6" loading="lazy"></div>
+                <div class="galerie-item"><img src="public/galerie-7.webp" alt="Catering Impression 7" loading="lazy"></div>
+                <div class="galerie-item"><img src="public/galerie-8.webp" alt="Catering Impression 8" loading="lazy"></div>
+                <div class="galerie-item"><img src="public/galerie-9.webp" alt="Catering Impression 9" loading="lazy"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <img class="footer-steffi" src="public/steffi.webp" alt="Stefanie Maier">
+
+        <div class="footer-inner">
+            <div class="footer-cols">
+
+                <div class="footer-col">
+                    <h3>Kontakt</h3>
+                    <p>Stefanie Maier</p>
+                    <p>Telefon: <a href="tel:+4915121877">01512 17877</a></p>
+                    <p>Email: <a href="mailto:info@smpartyservice.de">info@smpartyservice.de</a></p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/stefanie.maier.5454/" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+                        <a href="https://t.me/MStef79" target="_blank" rel="noopener noreferrer"><i class="bi bi-telegram"></i></a>
+                        <a href="https://wa.me/4915121877" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Über Uns</h3>
+                    <p>Ich bin Stefanie und leidenschaftliche Köchin mit über 25 Jahren Erfahrung in Gastronomie und Service. Gemeinsam mit meinem Team bieten wir ein individuelles Angebot aus Catering und köstlichen Speisen für Ihre Feier.</p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const burger    = document.getElementById('burger-menu');
+        const mobileNav = document.getElementById('mobile-nav');
+        const closeBtn  = document.getElementById('close-btn');
+
+        burger.addEventListener('click',   () => mobileNav.classList.add('open'));
+        closeBtn.addEventListener('click', () => mobileNav.classList.remove('open'));
+
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileNav.classList.remove('open'));
+        });
+    </script>
+
+</body>
+</html>
