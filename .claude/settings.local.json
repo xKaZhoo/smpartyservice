@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cwebp -version)",
+      "Bash(magick -version)",
+      "Bash(python3 -c \"from PIL import Image; print\\(''''pillow ok''''\\)\")",
+      "Bash(python -c \"from PIL import Image; print\\(''''pillow ok''''\\)\")",
+      "Bash(ffmpeg -version)",
+      "Bash(python -c \"import os; print\\(os.getcwd\\(\\)\\)\")",
+      "Bash(python -c \":*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)"
+    ]
+  }
+}
